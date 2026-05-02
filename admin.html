@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Online Examination System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="centered-page">
+    <div class="container">
+        <nav>
+            <h2>Admin Panel</h2>
+            <div class="nav-links">
+                <button onclick="logout()">Logout</button>
+            </div>
+        </nav>
+        <main>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('students')">👨‍🎓 Students</button>
+                <button class="tab-btn" onclick="openTab('subjects')">📚 Subjects</button>
+                <button class="tab-btn" onclick="openTab('questions')">❓ Questions</button>
+                <button class="tab-btn" onclick="openTab('exams')">📝 Create Exams</button>
+                <button class="tab-btn" onclick="openTab('studyMaterial')">📁 Study Material</button>
+                <button class="tab-btn" onclick="openTab('results')">📊 Results</button>
+            </div>
+            
+            <div id="students" class="tab-content active">
+                <h3>Add Student</h3>
+                <form id="addStudentForm">
+                    <div class="form-group">
+                        <label for="studentName">Student Name</label>
+                        <input type="text" id="studentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEmail">Student Email</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+                    <button type="submit">Add Student</button>
+                </form>
+                <h3 style="margin-top: 30px;">Student List</h3>
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="subjects" class="tab-content">
+                <h3>Add Subject</h3>
+                <form id="addSubjectForm">
+                    <div class="form-group">
+                        <label for="subjectName">Subject Name</label>
+                        <input type="text" id="subjectName" required>
+                    </div>
+                    <button type="submit">Add Subject</button>
+                </form>
+                <div style="margin-top: 20px;">
+                    <button class="secondary" onclick="addSampleSubjects()">Add Sample Subjects (DSA, OS, Web Dev)</button>
+                </div>
+                <h3 style="margin-top: 30px;">Subject List</h3>
+                <table id="subjectTable">
+                    <thead>
+                        <tr>
+                            <th>Subject Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="questions" class="tab-content">
+                <h3>Add Question</h3>
+                <form id="addQuestionForm">
+                    <div class="form-group">
+                        <label for="questionSubject">Subject 
+                            <button type="button" class="small secondary" onclick="loadSubjectsForQuestions()">🔄 Refresh</button>
+                        </label>
+                        <select id="questionSubject" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="questionText">Question</label>
+                        <textarea id="questionText" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="optionA">Option A</label>
+                        <input type="text" id="optionA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="optionB">Option B</label>
+                        <input type="text" id="optionB" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="optionC">Option C</label>
+                        <input type="text" id="optionC" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="optionD">Option D</label>
+                        <input type="text" id="optionD" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correctAnswer">Correct Answer</label>
+                        <select id="correctAnswer" required>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <button type="submit">Add Question</button>
+                </form>
+                <div style="margin-top: 20px;">
+                    <button class="secondary" onclick="addSampleQuestions()">Add Sample Questions</button>
+                </div>
+                <h3 style="margin-top: 30px;">Question List</h3>
+                <table id="questionTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Question</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="exams" class="tab-content">
+                <h3>Create Exam</h3>
+                <form id="createExamForm">
+                    <div class="form-group">
+                        <label for="examTitle">Exam Title</label>
+                        <input type="text" id="examTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="examSubject">Subject 
+                            <button type="button" class="small secondary" onclick="loadSubjectsForQuestions()">🔄 Refresh</button>
+                        </label>
+                        <select id="examSubject" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="examDuration">Duration (minutes)</label>
+                        <input type="number" id="examDuration" value="10" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passPercentage">Pass Percentage</label>
+                        <input type="number" id="passPercentage" value="40" min="0" max="100" required>
+                    </div>
+                    <button type="submit">Create Exam</button>
+                </form>
+                <div style="margin-top: 20px;">
+                    <button class="secondary" onclick="addSampleExams()">Add Sample Exams</button>
+                </div>
+                <h3 style="margin-top: 30px;">Exam List</h3>
+                <table id="examTable">
+                    <thead>
+                        <tr>
+                            <th>Exam Title</th>
+                            <th>Subject</th>
+                            <th>Duration</th>
+                            <th>Pass %</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="studyMaterial" class="tab-content">
+                <h3>Add Study Material</h3>
+                <form id="addStudyMaterialForm">
+                    <div class="form-group">
+                        <label for="materialTitle">Material Title</label>
+                        <input type="text" id="materialTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="materialSubject">Subject 
+                            <button type="button" class="small secondary" onclick="loadSubjectsForStudyMaterial()">🔄 Refresh</button>
+                        </label>
+                        <select id="materialSubject" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="materialType">File Type</label>
+                        <select id="materialType" required>
+                            <option value="pdf">PDF</option>
+                            <option value="ppt">PPT</option>
+                            <option value="word">Word</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="materialUrl">File URL (Google Drive/Dropbox link, or any direct URL)</label>
+                        <input type="url" id="materialUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="materialDescription">Description (optional)</label>
+                        <textarea id="materialDescription"></textarea>
+                    </div>
+                    <button type="submit">Add Study Material</button>
+                </form>
+                <h3 style="margin-top: 30px;">Study Material List</h3>
+                <table id="studyMaterialTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div id="results" class="tab-content">
+                <h3>Results</h3>
+                <table id="resultTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Subject</th>
+                            <th>Score</th>
+                            <th>Percentage</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

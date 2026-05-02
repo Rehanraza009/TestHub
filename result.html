@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result - Online Examination System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="centered-page">
+    <div class="container">
+        <header>
+            <h1>Exam Result</h1>
+        </header>
+        <main>
+            <div class="result-card">
+                <h2 id="subjectName"></h2>
+                <div class="score" id="score"></div>
+                <div class="percentage" id="percentage"></div>
+                <div class="pass-fail" id="passFail"></div>
+                
+                <div class="result-summary">
+                    <div class="summary-item correct">
+                        <h3 id="correctCount">0</h3>
+                        <p>Correct</p>
+                    </div>
+                    <div class="summary-item wrong">
+                        <h3 id="wrongCount">0</h3>
+                        <p>Wrong</p>
+                    </div>
+                    <div class="summary-item total">
+                        <h3 id="totalCount">0</h3>
+                        <p>Total</p>
+                    </div>
+                </div>
+                
+                <button onclick="window.location.href='student.html'">Back to Dashboard</button>
+            </div>
+            
+            <div id="answersReview" style="margin-top: 40px;"></div>
+        </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/result.js"></script>
+</body>
+</html>

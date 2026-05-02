@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - TestHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span>📚</span>
+                <h1>TestHub</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="sidebar-link active" onclick="showSection('dashboard')">
+                    <span>🏠</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="sidebar-link" onclick="showSection('exams')">
+                    <span>📋</span>
+                    <span>Available Exams</span>
+                </div>
+                <div class="sidebar-link" onclick="showSection('studyMaterial')">
+                    <span>📚</span>
+                    <span>Study Material</span>
+                </div>
+                <div class="sidebar-link" onclick="showSection('results')">
+                    <span>📊</span>
+                    <span>My Results</span>
+                </div>
+                <div class="sidebar-link" onclick="showSection('profile')">
+                    <span>👤</span>
+                    <span>Profile</span>
+                </div>
+                <div class="sidebar-link" onclick="showSection('password')">
+                    <span>🔐</span>
+                    <span>Change Password</span>
+                </div>
+                <div class="sidebar-link" onclick="logout()">
+                    <span>➡️</span>
+                    <span>Logout</span>
+                </div>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+                    <div class="logo">
+                        <span>📚</span>
+                        <span class="logo-text">TestHub</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+                    <button class="notification-btn">🔔</button>
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <div class="user-info">
+                            <h4 id="userName">User</h4>
+                            <p>Student</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="dashboard-content">
+                <div id="dashboard-section" class="content-section">
+                    <div class="hero-section">
+                        <div class="hero-content">
+                            <h1>Ready for your exam?</h1>
+                            <p class="hero-quote">"The future belongs to those who prepare for it today."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-cards">
+                        <div class="quick-card">
+                            <div class="quick-card-icon">📝</div>
+                            <h3>Available Exams</h3>
+                            <p>Browse and start your exams</p>
+                            <button onclick="showSection('exams')">View Exams</button>
+                        </div>
+                        <div class="quick-card">
+                            <div class="quick-card-icon">📊</div>
+                            <h3>My Results</h3>
+                            <p>Check your performance</p>
+                            <button onclick="showSection('results')">View Results</button>
+                        </div>
+                        <div class="quick-card">
+                            <div class="quick-card-icon">⏰</div>
+                            <h3>Upcoming Tests</h3>
+                            <p>Stay updated with schedules</p>
+                            <button>View Schedule</button>
+                        </div>
+                        <div class="quick-card">
+                            <div class="quick-card-icon">📚</div>
+                            <h3>Study Material</h3>
+                            <p>Access learning resources</p>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <div class="stats-header">
+                            <h2>Quick Stats</h2>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon blue">📄</div>
+                                <div class="stat-info">
+                                    <h3 id="examsAttempted">0</h3>
+                                    <p>Exams Attempted</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon green">📈</div>
+                                <div class="stat-info">
+                                    <h3 id="averageScoreCard">0%</h3>
+                                    <p>Average Score</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon purple">🏆</div>
+                                <div class="stat-info">
+                                    <h3 id="rank">#1</h3>
+                                    <p>Rank</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon orange">⏳</div>
+                                <div class="stat-info">
+                                    <h3 id="pendingExams">0</h3>
+                                    <p>Pending Exams</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-card">
+                            <h3>Overall Progress</h3>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                            <span class="progress-text">75% Complete</span>
+                        </div>
+                        
+                        <div class="circular-progress-card">
+                            <div class="circular-progress">
+                                <svg viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#1e40af" />
+                                            <stop offset="100%" stop-color="#7c3aed" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="bg" cx="50" cy="50" r="45"></circle>
+                                    <circle class="fg" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="70"></circle>
+                                </svg>
+                                <div class="circular-progress-text">
+                                    <span class="circular-value">75%</span>
+                                    <span class="circular-label">Score</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Available Exams</h3>
+                            <button class="view-all-btn" onclick="showSection('exams')">View All</button>
+                        </div>
+                        <div id="dashboardExams"></div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Recent Results</h3>
+                            <button class="view-all-btn" onclick="showSection('results')">View All</button>
+                        </div>
+                        <div id="dashboardResults"></div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Study Material</h3>
+                            <button class="view-all-btn" onclick="showSection('studyMaterial')">View All</button>
+                        </div>
+                        <div id="dashboardStudyMaterial"></div>
+                    </div>
+                </div>
+                
+                <div id="exams-section" class="content-section" style="display: none;">
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Available Exams</h3>
+                        </div>
+                        <div id="allExams"></div>
+                    </div>
+                </div>
+                
+                <div id="results-section" class="content-section" style="display: none;">
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>My Results</h3>
+                        </div>
+                        <div id="allResults"></div>
+                    </div>
+                </div>
+                
+                <div id="studyMaterial-section" class="content-section" style="display: none;">
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Study Material</h3>
+                        </div>
+                        <div id="allStudyMaterial"></div>
+                    </div>
+                </div>
+                
+                <div id="profile-section" class="content-section" style="display: none;">
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Profile Settings</h3>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-item">
+                                <label>Name</label>
+                                <p id="profileName">-</p>
+                            </div>
+                            <div class="profile-item">
+                                <label>Email</label>
+                                <p id="profileEmail">-</p>
+                            </div>
+                            <div class="profile-item">
+                                <label>Role</label>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="password-section" class="content-section" style="display: none;">
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Change Password</h3>
+                        </div>
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <button type="submit">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/student.js"></script>
+</body>
+</html>
